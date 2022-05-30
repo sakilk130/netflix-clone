@@ -1,6 +1,6 @@
-import Jumbotron from "./components/Jumbotron";
-import jumboData from "./fixtures/jumbo.json";
-interface IJumboData {
+import jumboData from "../fixtures/jumbo.json";
+import { Jumbotron } from "../components";
+export interface IJumboData {
   id: number;
   title: string;
   subTitle: string;
@@ -8,7 +8,8 @@ interface IJumboData {
   alt: string;
   direction?: string;
 }
-function App() {
+
+const JumbotronContainer = () => {
   return (
     <Jumbotron.Container>
       {jumboData?.map((jumbo: IJumboData) => (
@@ -18,12 +19,12 @@ function App() {
             <Jumbotron.SubTitle>{jumbo?.subTitle}</Jumbotron.SubTitle>
           </Jumbotron.Pane>
           <Jumbotron.Pane>
-            <Jumbotron.Image src={jumbo?.image} alt={jumbo?.alt}/>
+            <Jumbotron.Image src={jumbo?.image} alt={jumbo?.alt} />
           </Jumbotron.Pane>
         </Jumbotron>
       ))}
     </Jumbotron.Container>
   );
-}
+};
 
-export default App;
+export default JumbotronContainer;
