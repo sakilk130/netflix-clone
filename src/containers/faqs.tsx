@@ -11,12 +11,14 @@ const FaqsContainer = () => {
   return (
     <Accordion>
       <Accordion.Title>Frequently Asked Questions</Accordion.Title>
-      {faqsData?.map((faq: IFaqsData) => (
-        <Accordion.Item key={faq?.id}>
-          <Accordion.Header>{faq?.header}</Accordion.Header>
-          <Accordion.Body>{faq?.body}</Accordion.Body>
-        </Accordion.Item>
-      ))}
+      <Accordion.Frame>
+        {faqsData?.map((faq: IFaqsData) => (
+          <Accordion.Item key={faq?.id}>
+            <Accordion.Header>{faq?.header}</Accordion.Header>
+            <Accordion.Body>{faq?.body}</Accordion.Body>
+          </Accordion.Item>
+        ))}
+      </Accordion.Frame>
     </Accordion>
   );
 };
