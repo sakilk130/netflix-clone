@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form } from "../components";
+import * as ROUTES from "../constants/routes";
 import FooterContainer from "../containers/footer";
 import HeaderContainer from "../containers/header";
-import { firebase } from "../lib/firebase.prod";
-import * as ROUTES from "../constants/routes";
+import { FirebaseContext } from "../context/firebase";
 
 const SignIn = () => {
+  const { firebase } = useContext(FirebaseContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +16,7 @@ const SignIn = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    firebase
+    return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
@@ -24,7 +25,7 @@ const SignIn = () => {
         setError("");
         navigate(ROUTES.BROWSE);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         if (
           error.code === "auth/user-not-found" ||
           error.code === "auth/internal-error"
@@ -58,7 +59,8 @@ const SignIn = () => {
             />
             <Form.Submit disabled={isInvalid}>Sign In</Form.Submit>
             <Form.Text>
-              New to Netflix? <Form.Link to="/signup">Sign up now.</Form.Link>
+              New to Netflix?{" "}
+              <Form.Link to={ROUTES.SIGN_UP}>Sign up now.</Form.Link>
             </Form.Text>
             <Form.TextSmall>
               This page is protected by Google reCAPTCHA to ensure you're not a
