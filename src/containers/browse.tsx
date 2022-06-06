@@ -1,9 +1,11 @@
+import Fuse from "fuse.js";
 import { useContext, useEffect, useState } from "react";
-import { Card, Header, Loading } from "../components";
-import { FirebaseContext } from "../context/firebase";
-import SelectProfileContainer from "./profile";
+import { Card, Header, Loading, Player } from "../components";
 import * as ROUTES from "../constants/routes";
+import { FirebaseContext } from "../context/firebase";
 import logo from "../logo.svg";
+import FooterContainer from "./footer";
+import SelectProfileContainer from "./profile";
 
 const BrowseContainer = ({ slides }: any) => {
   const [category, setCategory] = useState("series");
@@ -27,21 +29,35 @@ const BrowseContainer = ({ slides }: any) => {
     setSlideRows(slides[category]);
   }, [category, slides]);
 
+  useEffect(() => {
+    const fuse = new Fuse(slideRows, {
+      keys: ["data.description", "data.title", "data.genre"],
+    });
+    const results = fuse.search(searchTerm).map(({ item }: any) => item);
+
+    if (slideRows.length > 0 && searchTerm.length > 3 && results.length > 0) {
+      setSlideRows(results);
+    } else {
+      setSlideRows(slides[category]);
+    }
+  }, [searchTerm]);
+
   return profile?.displayName ? (
     <>
-      {loading ? <Loading src={profile?.photoURL} /> : null}
-      <Header src="joker1">
+      {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
+
+      <Header src="joker1" dontShowOnSmallViewPort>
         <Header.Frame>
           <Header.Group>
             <Header.Logo to={ROUTES.HOME} src={logo} alt="Netflix" />
             <Header.TextLink
-              active={category === "series" ? true : false}
+              active={category === "series" ? "true" : "false"}
               onClick={() => setCategory("series")}
             >
               Series
             </Header.TextLink>
             <Header.TextLink
-              active={category === "films" ? true : false}
+              active={category === "films" ? "true" : "false"}
               onClick={() => setCategory("films")}
             >
               Films
@@ -53,11 +69,11 @@ const BrowseContainer = ({ slides }: any) => {
               setSearchTerm={setSearchTerm}
             />
             <Header.Profile>
-              <Header.Picture src={profile?.photoURL} />
+              <Header.Picture src={user.photoURL} />
               <Header.Dropdown>
                 <Header.Group>
-                  <Header.Picture src={profile?.photoURL} />
-                  <Header.TextLink>{user?.displayName}</Header.TextLink>
+                  <Header.Picture src={user.photoURL} />
+                  <Header.TextLink>{user.displayName}</Header.TextLink>
                 </Header.Group>
                 <Header.Group>
                   <Header.TextLink onClick={() => firebase.auth().signOut()}>
@@ -68,13 +84,15 @@ const BrowseContainer = ({ slides }: any) => {
             </Header.Profile>
           </Header.Group>
         </Header.Frame>
+
         <Header.Feature>
           <Header.FeatureCallOut>Watch Joker Now</Header.FeatureCallOut>
           <Header.Text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-            cumque, itaque, mollitia ad necessitatibus animi eligendi sint
-            officiis amet voluptatibus repellat dolorum. Dolor deserunt,
-            mollitia nobis quas incidunt magnam doloremque!
+            Forever alone in a crowd, failed comedian Arthur Fleck seeks
+            connection as he walks the streets of Gotham City. Arthur wears two
+            masks -- the one he paints for his day job as a clown, and the guise
+            he projects in a futile attempt to feel like he's part of the world
+            around him.
           </Header.Text>
           <Header.PlayButton>Play</Header.PlayButton>
         </Header.Feature>
@@ -82,27 +100,31 @@ const BrowseContainer = ({ slides }: any) => {
 
       <Card.Group>
         {slideRows.map((slideItem: any) => (
-          <Card key={`${category}-${slideItem?.title?.toLowerCase()}`}>
-            <Card.Title>{slideItem?.title}</Card.Title>
+          <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+            <Card.Title>{slideItem.title}</Card.Title>
             <Card.Entities>
-              {slideItem?.data?.map((item: any) => (
-                <Card.Item key={item?.id} item={item}>
+              {slideItem.data.map((item: any) => (
+                <Card.Item key={item.docId} item={item}>
                   <Card.Image
-                    src={`/images/${category}/${item?.genre}/${item?.slug}/small.jpg`}
+                    src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
                   />
                   <Card.Meta>
-                    <Card.SubTitle>{item?.title}</Card.SubTitle>
-                    <Card.Text>{item?.description}</Card.Text>
+                    <Card.SubTitle>{item.title}</Card.SubTitle>
+                    <Card.Text>{item.description}</Card.Text>
                   </Card.Meta>
                 </Card.Item>
               ))}
             </Card.Entities>
             <Card.Feature category={category}>
-              <p>Hello</p>
+              <Player>
+                <Player.Button />
+                <Player.Video src="/videos/bunny.mp4" />
+              </Player>
             </Card.Feature>
           </Card>
         ))}
       </Card.Group>
+      <FooterContainer />
     </>
   ) : (
     <SelectProfileContainer user={user} setProfile={setProfile} />

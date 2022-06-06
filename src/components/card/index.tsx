@@ -86,33 +86,34 @@ Card.Meta = function CardMeta({ children, ...restProps }: any) {
 Card.Image = function CardImage({ ...restProps }: any) {
   return <Image {...restProps} />;
 };
-
-Card.Feature = function CardFeature({ category, children, ...restProps }: any) {
-  const { itemFeature, setItemFeature, setShowFeature, showFeature } =
+Card.Feature = function CardFeature({ children, category, ...restProps }: any) {
+  const { showFeature, itemFeature, setShowFeature } =
     useContext(FeatureContext);
 
   return showFeature ? (
     <Feature
       {...restProps}
-      src={`/images/${category}/${itemFeature?.genre}/${itemFeature?.slug}/large.jpg`}
+      src={`/images/${category}/${itemFeature.genre}/${itemFeature.slug}/large.jpg`}
     >
       <Content>
-        <FeatureTitle>{itemFeature?.title}</FeatureTitle>
-        <FeatureText>{itemFeature?.description}</FeatureText>
+        <FeatureTitle>{itemFeature.title}</FeatureTitle>
+        <FeatureText>{itemFeature.description}</FeatureText>
         <FeatureClose onClick={() => setShowFeature(false)}>
           <img src="/images/icons/close.png" alt="Close" />
         </FeatureClose>
+
+        <Group margin="30px 0" flexDirection="row" alignItems="center">
+          <Maturity rating={itemFeature.maturity}>
+            {itemFeature.maturity < 12 ? "PG" : itemFeature.maturity}
+          </Maturity>
+          <FeatureText fontWeight="bold">
+            {itemFeature.genre.charAt(0).toUpperCase() +
+              itemFeature.genre.slice(1)}
+          </FeatureText>
+        </Group>
+
+        {children}
       </Content>
-      <Group margin="30px 0px" flexDirection="row" alignsItems="center">
-        <Maturity rating={itemFeature.maturity}>
-          {itemFeature.maturity < 12 ? "PG" : itemFeature.maturity}
-        </Maturity>
-        <FeatureText fontWeight="bold">
-          {itemFeature.genre.charAt(0).toUpperCase() +
-            itemFeature.genre.slice(1)}
-        </FeatureText>
-      </Group>
-      {children}
     </Feature>
   ) : null;
 };
