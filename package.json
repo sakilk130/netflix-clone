@@ -24,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject",
     "dev": "docker-compose -f docker-compose.dev.yml up"
   },
@@ -44,6 +44,36 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/src/app.tsx",
+      "!<rootDir>/src/helpers/routes.tsx",
+      "!<rootDir>/src/lib/firebase.ts",
+      "!<rootDir>/src/lib/firebase.prod.ts",
+      "!<rootDir>/src/index.tsx",
+      "!<rootDir>/src/seed.ts",
+      "!<rootDir>/src/utils/index.ts",
+      "!<rootDir>/src/pages/index.ts",
+      "!<rootDir>/src/global-styles.js",
+      "!<rootDir>/src/components/index.ts",
+      "!<rootDir>/src/firebase.prod.ts",
+      "!<rootDir>/src/hooks/*.ts",
+      "!<rootDir>/src/context/*.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "coverageReporters": [
+      "html",
+      "text"
     ]
   },
   "devDependencies": {

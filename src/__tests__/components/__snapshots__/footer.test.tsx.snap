@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> renders the <Footer /> with a populated data 1`] = `
+<div>
+  <div
+    class="footer__Container-sc-1nzqsk8-0 gwEjEi"
+  >
+    <p
+      class="footer__Title-sc-1nzqsk8-4 dHicnd"
+    >
+      Questions? Contact us.
+    </p>
+    <div
+      class="footer__Break-sc-1nzqsk8-6 eiaPIq"
+    />
+    <div
+      class="footer__Row-sc-1nzqsk8-1 gpYbRO"
+    >
+      <div
+        class="footer__Column-sc-1nzqsk8-2 gkRLML"
+      >
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          FAQ
+        </a>
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Investor Relations
+        </a>
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Ways to Watch
+        </a>
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Corporate Information
+        </a>
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Netflix Originals
+        </a>
+      </div>
+      <div
+        class="footer__Column-sc-1nzqsk8-2 gkRLML"
+      >
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Help Centre
+        </a>
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Jobs
+        </a>
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Terms of Use
+        </a>
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Contact Us
+        </a>
+      </div>
+      <div
+        class="footer__Column-sc-1nzqsk8-2 gkRLML"
+      >
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Account
+        </a>
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Redeem gift cards
+        </a>
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Privacy
+        </a>
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Speed Test
+        </a>
+      </div>
+      <div
+        class="footer__Column-sc-1nzqsk8-2 gkRLML"
+      >
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Media Centre
+        </a>
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Buy gift cards
+        </a>
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Cookie Preferences
+        </a>
+        <a
+          class="footer__Link-sc-1nzqsk8-3 ddvWWA"
+          href="#"
+        >
+          Legal Notices
+        </a>
+      </div>
+    </div>
+    <div
+      class="footer__Break-sc-1nzqsk8-6 eiaPIq"
+    />
+    <p
+      class="footer__Text-sc-1nzqsk8-5 czDSTA"
+    >
+      Netflix Bangladesh
+    </p>
+  </div>
+</div>
+`;
